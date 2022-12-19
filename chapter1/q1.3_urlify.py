@@ -38,7 +38,6 @@ class UnitTests(unittest.TestCase):
 
     def test_is_unique_test(self):
         for s1, length, expected in self.test_cases:
-            print("testing ", s1)
             for test_func in self.test_functions:
                 result = test_func(s1, length)
                 assert (result == expected), f"{test_func.__name__} failed for value: [{s1}], result is [{result}]"
