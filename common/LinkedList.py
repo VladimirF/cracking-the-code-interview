@@ -11,8 +11,9 @@ class LinkedList:
     def __init__(self, values=None):
         self.head = None
         self.tail = None
-        for v in values:
-            self.add(v)
+        if values:
+            for v in values:
+                self.add(v)
 
     def add(self, value):
         if self.head is None:
