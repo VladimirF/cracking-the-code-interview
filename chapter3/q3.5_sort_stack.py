@@ -49,22 +49,73 @@ class SortStack:
     def __str__(self):
         return str(self.min_stack)
 
+    def __len__(self):
+        return len(self.min_stack)
+
 
 class Test(unittest.TestCase):
     def test_func(self):
         ss = SortStack()
         for i in range(1, 11):
             ss.push(i)
-        print("ss.min_stack", ss.min_stack)
-        print("should be ", [_ for _ in range(10, 0, -1)])
 
         assert ss.min_stack.stack == [_ for _ in range(10, 0, -1)]
 
         values = []
         for _ in range(11, 1, -1):
             values.append(ss.pop())
-        print("values", values)
+
         assert values == [_ for _ in range(1, 11)]
+
+    def test_push_one(self):
+        stack = SortStack()
+        stack.push(1)
+        assert len(stack) == 1
+
+    def test_push_two(self):
+        stack = SortStack()
+        stack.push(1)
+        stack.push(2)
+        assert len(stack) == 2
+
+    def test_push_three(self):
+        stack = SortStack()
+        stack.push(1)
+        stack.push(2)
+        stack.push(3)
+        assert len(stack) == 3
+
+    def test_pop_one(self):
+        stack = SortStack()
+        stack.push(1)
+        assert stack.pop() == 1
+
+    def test_pop_two(self):
+        stack = SortStack()
+        stack.push(1)
+        stack.push(2)
+        assert stack.pop() == 1
+        assert stack.pop() == 2
+
+    def test_pop_three(self):
+        stack = SortStack()
+        stack.push(1)
+        stack.push(2)
+        stack.push(3)
+        assert stack.pop() == 1
+        assert stack.pop() == 2
+        assert stack.pop() == 3
+
+    def test_push_mixed(self):
+        stack = SortStack()
+        stack.push(3)
+        stack.push(2)
+        stack.push(1)
+        stack.push(4)
+        assert stack.pop() == 1
+        assert stack.pop() == 2
+        assert stack.pop() == 3
+        assert stack.pop() == 4
 
 
 if __name__ == "__main__":
