@@ -1,56 +1,29 @@
 import sys
 import unittest
 
-from common.Stack import *
+from common.Stack import Stack
 
 
-class SortStack:
+class SortStack(Stack):
     def __init__(self):
-        self.min_stack = Stack()
+        super().__init__()
         self.buffer_stack = Stack()
-
-    def pop(self):
-        """
-        time complexity O(1)
-        size complexity O(1)
-        """
-        return self.min_stack.pop()
-
-    def peek(self):
-        """
-        time complexity O(1)
-        size complexity O(1)
-        """
-        return self.min_stack.peek()
 
     def push(self, val):
         """
         time complexity O(n)
         size complexity O(n)
         """
-        while not self.min_stack.is_empty():
-            if val > self.min_stack.peek():
-                self.buffer_stack.push(self.min_stack.pop())
+        while not super().is_empty():
+            if val > super().peek():
+                self.buffer_stack.push(super().pop())
             else:
                 break
 
-        self.min_stack.push(val)
+        super().push(val)
 
         while not self.buffer_stack.is_empty():
-            self.min_stack.push(self.buffer_stack.pop())
-
-    def is_empty(self):
-        """
-        time complexity O(1)
-        size complexity O(1)
-        """
-        return self.min_stack.is_empty()
-
-    def __str__(self):
-        return str(self.min_stack)
-
-    def __len__(self):
-        return len(self.min_stack)
+            super().push(self.buffer_stack.pop())
 
 
 class Test(unittest.TestCase):
@@ -58,8 +31,7 @@ class Test(unittest.TestCase):
         ss = SortStack()
         for i in range(1, 11):
             ss.push(i)
-
-        assert ss.min_stack.stack == [_ for _ in range(10, 0, -1)]
+            assert ss.peek() == 1
 
         values = []
         for _ in range(11, 1, -1):
